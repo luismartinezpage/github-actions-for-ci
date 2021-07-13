@@ -7,20 +7,7 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: npm install and build webpack
-        run: |
-          npm install
-          npm run build
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - uses: actions/download-artifact@main
@@ -31,11 +18,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, and test
-    - uses: actions/download-artifact@main
-      with:
-        name: webpack artifacts
-        path: public
     - name: npm install, and test
         npm install
         npm test
